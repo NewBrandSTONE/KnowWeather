@@ -28,7 +28,8 @@ public class SplashActivity extends BaseActivity {
         mSplashFl.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+//                Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                Intent intent = new Intent(SplashActivity.this, MainFragmentActivity.class);
                 startActivity(intent);
                 finish();
             }

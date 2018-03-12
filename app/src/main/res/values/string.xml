@@ -13,4 +13,7 @@
     <string name="weather_aqi_guide" translatable="false">空气质量指数(AQI)</string>
     <string name="weather_lifeIndexes">生活指数</string>
 
+    <string name="bottom_nav_weather">天气</string>
+    <string name="bottom_nav_record">记录</string>
+    <string name="bottom_nav_alarm">闹钟</string>
 </resources>

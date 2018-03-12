@@ -64,18 +64,18 @@ public class WeatherModel extends BaseViewModel implements LocationNotification 
         });
     }
 
-    LiveData<StatusDataResource.Status> getGetWeatherStatus() {
+    public LiveData<StatusDataResource.Status> getGetWeatherStatus() {
         return mGetWeatherStatus;
     }
 
 
-    void updateWeather() {
+    public void updateWeather() {
         if(CoreManager.getImpl(ICityProvider.class).hadCurrentCityId()) {
             CoreManager.getImpl(IFetchWeather.class).queryWeather(CoreManager.getImpl(ICityProvider.class).getCurrentCityId());
         }
     }
 
-    boolean locationIsCurrent() {
+    public boolean locationIsCurrent() {
         return CoreManager.getImpl(ICityProvider.class).getCurrentCityId()
                 .equals(CoreManager.getImpl(ILocationApi.class).getLocatedCityId());
     }
@@ -105,11 +105,11 @@ public class WeatherModel extends BaseViewModel implements LocationNotification 
         mLifeIndexData = new LifeIndexData(weatherData.getLifeIndex());
     }
 
-    WeatherData.BasicEntity getWeatherBaseData() {
+    public WeatherData.BasicEntity getWeatherBaseData() {
         return mWeatherBaseData;
     }
 
-    List<HoursForecastData> getHoursDatas() {
+    public List<HoursForecastData> getHoursDatas() {
         return mHoursDatas;
     }
 

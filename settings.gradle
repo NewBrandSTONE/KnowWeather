@@ -18,7 +18,7 @@ def initVersion() {
 
     gradle.ext.compileSdkVersion = 27
     gradle.ext.targetVersion =27
-    gradle.ext.minSdkVersion = 14
+    gradle.ext.minSdkVersion = 17
     gradle.ext.supportVersion = '27.0.2'
     gradle.ext.versionCode = 17
     gradle.ext.versionName = '1.3.0'

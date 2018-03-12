@@ -38,18 +38,18 @@ public class CityRepositoryImpl implements ICityRepositoryApi {
 
     @Override
     public void onCreate() {
-        mCityDatabase = DBHelper.provider(CityDatabase.class,CITY_DB_NAME);
-        mCityHandler =  TaskScheduler.provideHandler(TAG);
+        mCityDatabase = DBHelper.provider(CityDatabase.class, CITY_DB_NAME);
+        mCityHandler = TaskScheduler.provideHandler(TAG);
     }
 
     @Override
     public void saveCurrentCityId(String cityId) {
-        PreferencesHelper.put(CURRENT_CITY,cityId);
+        PreferencesHelper.put(CURRENT_CITY, cityId);
     }
 
     @Override
     public String getCurrentCityId() {
-        return PreferencesHelper.get(CURRENT_CITY,CURRENT_CITY);
+        return PreferencesHelper.get(CURRENT_CITY, CURRENT_CITY);
     }
 
     @Override
@@ -72,14 +72,14 @@ public class CityRepositoryImpl implements ICityRepositoryApi {
                 try {
                     String citys = FileHelper.assetFile2String("china_citys.txt", CoreManager.getContext());
                     JSONArray jsonArray = new JSONArray(citys);
-                    List<City>  allCitys = new ArrayList<>();
+                    List<City> allCitys = new ArrayList<>();
 
-                    for(int index =0 ; index < jsonArray.length() ;index++) {
+                    for (int index = 0; index < jsonArray.length(); index++) {
                         JSONObject cityObject = jsonArray.getJSONObject(index);
                         CityEntry cityEntry = JsonHelper.fromJson(cityObject.toString(), CityEntry.class);
 
-                        for(CityEntry.CityBean cityBean : cityEntry.getCity()) {
-                            for(CityEntry.CityBean.CountyBean county : cityBean.getCounty()) {
+                        for (CityEntry.CityBean cityBean : cityEntry.getCity()) {
+                            for (CityEntry.CityBean.CountyBean county : cityBean.getCounty()) {
                                 City city = new City();
                                 city.province = cityEntry.getName();
                                 city.provinceEn = cityEntry.getName_en();
@@ -100,7 +100,7 @@ public class CityRepositoryImpl implements ICityRepositoryApi {
                     PreferencesHelper.get(CITY_INITED, true);
 
                 } catch (Exception e) {
-                    LogHelper.error(TAG,"parse city info fail , %s",e);
+                    LogHelper.error(TAG, "parse city info fail , %s", e);
                 }
 
             }
@@ -115,8 +115,8 @@ public class CityRepositoryImpl implements ICityRepositoryApi {
      */
     @Override
     @WorkerThread
-    public City searchCity(final String cityName,final String county) {
-        return mCityDatabase.cityDao().searchCity(cityName,county);
+    public City searchCity(final String cityName, final String county) {
+        return mCityDatabase.cityDao().searchCity(cityName, county);
     }
 
     @Override
@@ -128,7 +128,7 @@ public class CityRepositoryImpl implements ICityRepositoryApi {
     @Override
     @WorkerThread
     public List<City> matchingCity(String keyword) {
-        return  mCityDatabase.cityDao().matchCity(keyword);
+        return mCityDatabase.cityDao().matchCity(keyword);
     }
 
     @Override
@@ -139,7 +139,7 @@ public class CityRepositoryImpl implements ICityRepositoryApi {
     @Override
     @WorkerThread
     public List<City> queryAllCities() {
-        if(mAllCityData.size() > 0){
+        if (mAllCityData.size() > 0) {
             return mAllCityData;
         }
         mAllCityData = mCityDatabase.cityDao().getAll();
@@ -157,7 +157,7 @@ public class CityRepositoryImpl implements ICityRepositoryApi {
             char a = cityLeft.countryEn.charAt(0);
             char b = cityRight.countryEn.charAt(0);
 
-            return a-b;
+            return a - b;
         }
     }
 }

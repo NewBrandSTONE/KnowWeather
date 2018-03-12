@@ -24,7 +24,8 @@ import com.umeng.socialize.UMShareAPI;
 
 public class AppConfig {
     private static final String APP_NAME = "knowweather";
-    private static final String BUGLY_APPID = "d29f7bc148";
+//    private static final String BUGLY_APPID = "d29f7bc148";
+    private static final String BUGLY_APPID = "3c46367eb0";
 
     public static void initialize(Application context) {
         initANRWatch(context);

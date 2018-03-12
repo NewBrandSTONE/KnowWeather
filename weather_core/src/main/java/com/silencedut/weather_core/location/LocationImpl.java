@@ -46,33 +46,33 @@ public class LocationImpl implements ILocationApi {
                         public void run() {
                             boolean locationSucceed = false;
                             try {
-                                String city = aMapLocation.getCity().substring(0,2);
+                                String city = aMapLocation.getCity().substring(0, 2);
                                 String district = aMapLocation.getDistrict().substring(0, 2);
 
-                                mLocatedCity = CoreManager.getImpl(ICityProvider.class).searchCity(city,district);
+                                mLocatedCity = CoreManager.getImpl(ICityProvider.class).searchCity(city, district);
 
                                 //城市库全名不匹配
                                 if (mLocatedCity == null) {
-                                    city = city.substring(0,2);
-                                    district = district.substring(0,2);
-                                    mLocatedCity = CoreManager.getImpl(ICityProvider.class).searchCity(city,district);
+                                    city = city.substring(0, 2);
+                                    district = district.substring(0, 2);
+                                    mLocatedCity = CoreManager.getImpl(ICityProvider.class).searchCity(city, district);
 
                                 }
 
                                 locationSucceed = mLocatedCity != null;
 
-                                if(locationSucceed) {
+                                if (locationSucceed) {
                                     mLocatedCity.latitude = String.valueOf(aMapLocation.getLatitude());
                                     mLocatedCity.longitude = String.valueOf(aMapLocation.getLongitude());
                                 }
-                            }catch (Exception e) {
-                                LogHelper.error(TAG,"location error %s",e);
+                            } catch (Exception e) {
+                                LogHelper.error(TAG, "location error %s", e);
                             }
 
                             Router.instance().getReceiver(LocationNotification.class)
-                                    .onLocation(locationSucceed, locationSucceed ?mLocatedCity.cityId:"");
+                                    .onLocation(locationSucceed, locationSucceed ? mLocatedCity.cityId : "");
 
-                            LogHelper.info(TAG,"located city %s",mLocatedCity);
+                            LogHelper.info(TAG, "located city %s", mLocatedCity);
 
 
                         }
@@ -90,7 +90,7 @@ public class LocationImpl implements ILocationApi {
 
     @Override
     public String getLocatedCityId() {
-        return mLocatedCity!=null?mLocatedCity.cityId:"$";
+        return mLocatedCity != null ? mLocatedCity.cityId : "$";
     }
 
     @Override

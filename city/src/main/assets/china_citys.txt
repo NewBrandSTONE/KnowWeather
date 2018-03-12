@@ -14054,6 +14054,11 @@
             "name": "宾阳",
             "code": "CN101300109",
             "name_en": "binyang"
+          },
+          {
+            "name": "青秀",
+            "code": "CN101300110",
+            "name_en": "qingxiu"
           }
         ]
       },
