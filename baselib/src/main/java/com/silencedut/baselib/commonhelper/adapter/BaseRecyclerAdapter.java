@@ -129,13 +129,13 @@ public class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         this.mHolderClickListener = clickListener;
     }
 
-    public  interface HolderClickListener <T extends BaseAdapterData>{
-        void onHolderClicked(int position,T data);
+    public interface HolderClickListener<T extends BaseAdapterData> {
+        void onHolderClicked(int position, T data);
     }
 
-    public <T extends BaseAdapterData> void onHolderClicked(int position,T data) {
-        if(mHolderClickListener!=null) {
-            mHolderClickListener.onHolderClicked(position,data);
+    public <T extends BaseAdapterData> void onHolderClicked(int position, T data) {
+        if (mHolderClickListener != null) {
+            mHolderClickListener.onHolderClicked(position, data);
         }
     }
 }

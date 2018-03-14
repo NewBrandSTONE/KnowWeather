@@ -3,13 +3,16 @@
     <item
         android:id="@+id/menu_weather_item"
         android:checked="true"
+        android:icon="@mipmap/weather_icon"
         android:title="@string/bottom_nav_weather" />
     <item
         android:id="@+id/menu_record_item"
         android:checked="true"
+        android:icon="@mipmap/diary_icon"
         android:title="@string/bottom_nav_record" />
     <item
         android:id="@+id/menu_alarm_item"
         android:checked="true"
+        android:icon="@mipmap/alarm_icon"
         android:title="@string/bottom_nav_alarm" />
 </menu>

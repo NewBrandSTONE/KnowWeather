@@ -40,6 +40,7 @@ import com.silencedut.weather_core.permission.IPermissionApi;
 import com.silencedut.weather_core.viewmodel.ModelProvider;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 import static android.animation.ObjectAnimator.ofFloat;
 
@@ -279,5 +280,10 @@ public class HealthWeatherFragment extends BaseFragment {
         mActionRotate.end();
         mRefreshStatus.setVisibility(View.GONE);
         mFloatAction.show();
+    }
+
+    @OnClick(R.id.float_action)
+    public void onClick() {
+        mWeatherModel.updateWeather();
     }
 }

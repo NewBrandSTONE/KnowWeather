@@ -14,15 +14,23 @@ import com.silencedut.weather_core.corebase.BaseFragment;
 
 public interface ICityProvider extends ICoreApi {
     @WorkerThread
-    City searchCity( String cityId);
+    City searchCity(String cityId);
+
     @WorkerThread
-    City searchCity( String cityName,final String county);
+    City searchCity(String cityName, final String county);
+
     Handler getCityWorkHandler();
+
     void navigationSearchActivity(Context context);
+
     void saveCurrentCityId(String cityId);
+
     String getCurrentCityId();
+
     boolean hadCurrentCityId();
-    Pair<BaseFragment,Integer> provideCityFragment();
+
+    Pair<BaseFragment, Integer> provideCityFragment();
+
     void loadCitys();
 
 }

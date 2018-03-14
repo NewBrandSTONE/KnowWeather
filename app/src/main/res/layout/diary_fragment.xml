@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,7 +10,71 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/dark_background"
         android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/main_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/toolbar_height"
+            android:background="@color/colorPrimary"
+            app:popupTheme="@style/Theme.AppCompat.Light"
+            app:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+            <ImageView
+                android:id="@+id/title_icon"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_gravity="center_vertical"
+                android:scaleType="centerInside"
+                android:src="@mipmap/core_weather_few_clouds" />
+
+            <TextView
+                android:id="@+id/title_temp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="36dp"
+                android:text="28°"
+                android:textColor="@color/main_text_white"
+                android:textSize="@dimen/text_size_appbar_title" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+
+                <TextView
+                    android:id="@+id/main_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:drawablePadding="@dimen/common_dimen_tiny"
+                    android:gravity="center"
+                    android:textColor="@color/main_background"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:id="@+id/refresh_status"
+                    android:layout_width="@dimen/text_size_small"
+                    android:layout_height="@dimen/text_size_small"
+                    android:layout_below="@id/main_location"
+                    android:layout_marginTop="@dimen/common_dimen_min"
+                    android:src="@mipmap/weather_refresh"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/main_post_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/main_location"
+                    android:layout_marginLeft="@dimen/common_dimen_min"
+                    android:layout_toRightOf="@id/refresh_status"
+                    android:text="@string/weather_refreshing"
+                    android:textColor="@color/secondly_text_white"
+                    android:textSize="@dimen/text_size_small" />
+            </RelativeLayout>
+        </android.support.v7.widget.Toolbar>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -62,7 +126,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="12dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/back_today_button"
@@ -180,13 +245,14 @@
             android:id="@+id/content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:background="@color/dark_background">
 
             <com.ldf.calendar.view.MonthPager
                 android:id="@+id/calendar_view"
                 android:layout_width="match_parent"
                 android:layout_height="270dp"
-                android:background="#fff"></com.ldf.calendar.view.MonthPager>
+                android:background="#fff" />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/list"
@@ -194,13 +260,24 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="bottom"
                 android:layout_marginBottom="45dp"
-                android:background="#ffffff"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@color/dark_background"
                 android:clipChildren="false"
                 android:clipToPadding="false"
                 app:layout_behavior="com.ldf.calendar.behavior.RecyclerViewBehavior" />
             <!-- paddingBottom或者magin距离必须是MonthPager高度的1/6-->
             <!-- RecyclerView的高度必须是MatchParent-->
             <!-- RecyclerView的background必须是非透明-->
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/float_action"
+                android:layout_width="@dimen/toolbar_height"
+                android:layout_height="@dimen/toolbar_height"
+                android:layout_gravity="bottom|right"
+                android:layout_margin="@dimen/float_button_margin"
+                android:clickable="true"
+                android:src="@mipmap/weather_refresh"
+                app:rippleColor="@color/main_background" />
         </android.support.design.widget.CoordinatorLayout>
     </LinearLayout>
-</LinearLayout>
+</android.support.design.widget.CoordinatorLayout>

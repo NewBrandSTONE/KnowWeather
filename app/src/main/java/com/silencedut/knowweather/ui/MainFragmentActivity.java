@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.MenuItem;
 
 import com.silencedut.knowweather.R;
+import com.silencedut.knowweather.ui.fragment.alarm.HealthAlarmFragment;
 import com.silencedut.knowweather.ui.fragment.diary.HealthDiaryFragment;
 import com.silencedut.knowweather.ui.fragment.weather.HealthWeatherFragment;
 import com.silencedut.weather_core.corebase.BaseActivity;
@@ -27,6 +28,7 @@ public class MainFragmentActivity extends BaseActivity implements BottomNavigati
 
     private HealthWeatherFragment mWeatherFragment;
     private HealthDiaryFragment mDiaryFragment;
+    private HealthAlarmFragment mAlarmFragment;
 
     @Override
     public int getContentViewId() {
@@ -41,13 +43,15 @@ public class MainFragmentActivity extends BaseActivity implements BottomNavigati
 
     private void loadFragment() {
         mWeatherFragment = new HealthWeatherFragment();
+        mAlarmFragment = new HealthAlarmFragment();
         mDiaryFragment = new HealthDiaryFragment();
-
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.frame_main, mWeatherFragment, mWeatherFragment.getClass().getSimpleName())
                 .add(R.id.frame_main, mDiaryFragment, mDiaryFragment.getClass().getSimpleName())
+                .add(R.id.frame_main, mAlarmFragment, mAlarmFragment.getClass().getSimpleName())
                 .show(mWeatherFragment)
                 .hide(mDiaryFragment)
+                .hide(mAlarmFragment)
                 .commit();
     }
 
@@ -64,16 +68,26 @@ public class MainFragmentActivity extends BaseActivity implements BottomNavigati
             case R.id.menu_weather_item: {
                 transaction
                         .show(mWeatherFragment)
-                        .hide(mDiaryFragment).commit();
+                        .hide(mDiaryFragment)
+                        .hide(mAlarmFragment)
+                        .commit();
+
                 break;
             }
             case R.id.menu_record_item: {
                 transaction
                         .show(mDiaryFragment)
-                        .hide(mWeatherFragment).commit();
+                        .hide(mAlarmFragment)
+                        .hide(mWeatherFragment)
+                        .commit();
                 break;
             }
             case R.id.menu_alarm_item: {
+                transaction
+                        .show(mAlarmFragment)
+                        .hide(mDiaryFragment)
+                        .hide(mWeatherFragment)
+                        .commit();
                 break;
             }
             default: {

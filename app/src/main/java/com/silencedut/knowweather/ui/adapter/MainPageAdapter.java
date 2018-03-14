@@ -20,7 +20,7 @@ import java.util.List;
  * Created by SilenceDut on 16/10/17.
  */
 public class MainPageAdapter extends FragmentPagerAdapter {
-    private final List<Pair<BaseFragment,Integer>> mFragmentList = new ArrayList<>();
+    private final List<Pair<BaseFragment, Integer>> mFragmentList = new ArrayList<>();
 
     private Context context;
 
@@ -39,14 +39,14 @@ public class MainPageAdapter extends FragmentPagerAdapter {
         return mFragmentList.size();
     }
 
-    public void addFrag(Pair<BaseFragment,Integer> fragmentPair) {
+    public void addFrag(Pair<BaseFragment, Integer> fragmentPair) {
         mFragmentList.add(fragmentPair);
     }
 
     public View getTabView(int position, ViewGroup parent) {
         View view;
         view = LayoutInflater.from(context).inflate(R.layout.weather_tab_view, parent, false);
-        ImageView img =  view.findViewById(R.id.tab_icon);
+        ImageView img = view.findViewById(R.id.tab_icon);
         img.setImageResource(mFragmentList.get(position).second);
         return view;
     }

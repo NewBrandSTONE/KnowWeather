@@ -25,10 +25,10 @@ import java.util.concurrent.atomic.AtomicReference;
 /**
  * Created by SilenceDut on 2018/1/15 .
  */
-public class WeatherRepository  {
+public class WeatherRepository {
     private static final String TAG = "WeatherRepository";
 
-    private final static  String WEATHER_DB_NAME = "weather";
+    private final static String WEATHER_DB_NAME = "weather";
     private WeatherDatabase mWeatherDatabase;
     private static final AtomicReference<WeatherRepository> INSTANCE_REFERENCE = new AtomicReference<>();
 
@@ -36,7 +36,7 @@ public class WeatherRepository  {
     private Handler mWeatherWorkHandler;
 
     private WeatherRepository() {
-        mWeatherDatabase = DBHelper.provider(WeatherDatabase.class,WEATHER_DB_NAME);
+        mWeatherDatabase = DBHelper.provider(WeatherDatabase.class, WEATHER_DB_NAME);
         mWeatherWorkHandler = TaskScheduler.provideHandler(TAG);
         mWeatherDataLiveData = new MutableLiveData<>();
 
@@ -44,7 +44,7 @@ public class WeatherRepository  {
 
     public static WeatherRepository getInstance() {
 
-        for (;;) {
+        for (; ; ) {
             WeatherRepository current = INSTANCE_REFERENCE.get();
             if (current != null) {
                 return current;
@@ -67,7 +67,7 @@ public class WeatherRepository  {
 
     @Nullable
     public WeatherData getCachedWeatherData() {
-        return mWeatherDataLiveData.getValue() == null?null:mWeatherDataLiveData.getValue().data;
+        return mWeatherDataLiveData.getValue() == null ? null : mWeatherDataLiveData.getValue().data;
     }
 
 
@@ -76,16 +76,16 @@ public class WeatherRepository  {
         mWeatherWorkHandler.post(new Runnable() {
             @Override
             public void run() {
-                updateWeather(cityId,statusDataResource);
+                updateWeather(cityId, statusDataResource);
             }
         });
     }
 
     @WorkerThread
-    public void updateWeather(String cityId,final StatusDataResource<WeatherData> statusDataResource) {
+    public void updateWeather(String cityId, final StatusDataResource<WeatherData> statusDataResource) {
 
 
-        if(StatusDataResource.Status.SUCCESS.equals(statusDataResource.status)) {
+        if (StatusDataResource.Status.SUCCESS.equals(statusDataResource.status)) {
             try {
                 WeatherData weatherData = statusDataResource.data;
                 Weather weather = new Weather();
@@ -93,17 +93,17 @@ public class WeatherRepository  {
                 weather.weatherJson = JsonHelper.toJson(weatherData);
 
                 mWeatherDatabase.weatherDao().saveWeather(weather);
-            }catch (Exception e) {
-                LogHelper.error(TAG,"updateWeather error %s",e);
+            } catch (Exception e) {
+                LogHelper.error(TAG, "updateWeather error %s", e);
             }
-        } else if(StatusDataResource.Status.LOADING.equals(statusDataResource.status)) {
+        } else if (StatusDataResource.Status.LOADING.equals(statusDataResource.status)) {
             try {
                 WeatherData weatherData = JsonHelper.fromJson(mWeatherDatabase.weatherDao().fetchWeather(cityId).weatherJson, WeatherData.class);
                 if (weatherData != null) {
                     statusDataResource.data = weatherData;
                 }
-            }catch (Exception e) {
-                LogHelper.error(TAG,"no cache hit");
+            } catch (Exception e) {
+                LogHelper.error(TAG, "no cache hit");
             }
 
         }
@@ -114,10 +114,9 @@ public class WeatherRepository  {
     }
 
 
-
     @MainThread
     public void deleteWeather(final String cityId) {
-        if(cityId == null) {
+        if (cityId == null) {
             return;
         }
         mWeatherWorkHandler.post(new Runnable() {
@@ -133,13 +132,13 @@ public class WeatherRepository  {
     public List<WeatherData> getFollowedWeather() {
         List<WeatherData> followedWeather = new ArrayList<>();
         try {
-            for(Weather weather:mWeatherDatabase.weatherDao().fetchFollowedWeather()) {
-                WeatherData weatherData = JsonHelper.fromJson(weather.weatherJson,WeatherData.class);
+            for (Weather weather : mWeatherDatabase.weatherDao().fetchFollowedWeather()) {
+                WeatherData weatherData = JsonHelper.fromJson(weather.weatherJson, WeatherData.class);
                 followedWeather.add(weatherData);
             }
 
-        }catch (Exception e) {
-            LogHelper.info(TAG,"getFollowedWeather error %s",e);
+        } catch (Exception e) {
+            LogHelper.info(TAG, "getFollowedWeather error %s", e);
         }
 
         return followedWeather;
