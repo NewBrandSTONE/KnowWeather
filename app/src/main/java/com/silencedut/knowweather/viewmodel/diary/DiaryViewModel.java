@@ -52,12 +52,12 @@ public class DiaryViewModel extends BaseViewModel {
         return mDiary;
     }
 
-    public void fetchDiary() {
+    public void fetchDiary(final String searchDate) {
         // 这里应该在Repository中完成
         TaskScheduler.execute(new Task<List<DiaryEntityData>>() {
             @Override
             public List<DiaryEntityData> doInBackground() throws InterruptedException {
-                return CoreManager.getImpl(IDiaryRepositoryApi.class).searchAllDiary();
+                return CoreManager.getImpl(IDiaryRepositoryApi.class).searchDiary(searchDate);
             }
 
             @Override
@@ -74,7 +74,16 @@ public class DiaryViewModel extends BaseViewModel {
         mDiary.postValue(data);
     }
 
-    public void insertTestData() {
-        CoreManager.getImpl(IDiaryProvider.class).loadDiaryData();
+    public void insertSportData(String method, String time, String recordDate, int type) {
+        DiaryEntityData data = new DiaryEntityData();
+        data.setTypeId(type);
+        data.setMethod(method);
+        data.setContent(time);
+        data.setRecordDate(recordDate);
+        CoreManager.getImpl(IDiaryProvider.class).insertSportData(data);
+    }
+
+    public void deleteDiaryData(DiaryEntityData data) {
+        CoreManager.getImpl(IDiaryProvider.class).deleteDiaryData(data);
     }
 }

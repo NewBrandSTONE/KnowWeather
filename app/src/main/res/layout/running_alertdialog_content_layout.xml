@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:gravity="right"
+        android:orientation="horizontal">
+
+        <android.support.v7.widget.AppCompatRadioButton
+            android:id="@+id/button_sport"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="锻炼" />
+
+        <android.support.v7.widget.AppCompatRadioButton
+            android:id="@+id/button_medicine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="用药" />
+    </RadioGroup>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/text_method"
+        android:layout_width="match_parent"
+        android:hint="方式"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/ed_method"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLength="10"
+            android:padding="20dp" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/text_time"
+        android:layout_width="match_parent"
+        android:hint="时长"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/ed_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:maxLength="3"
+            android:padding="20dp" />
+
+    </android.support.design.widget.TextInputLayout>
+</LinearLayout>

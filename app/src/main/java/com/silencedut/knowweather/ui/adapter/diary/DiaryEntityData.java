@@ -19,13 +19,19 @@ public class DiaryEntityData implements BaseAdapterData {
     @PrimaryKey(autoGenerate = true)
     private int diaryId;
     /**
-     * 类型-跑步；吃药
+     * 可以当做运动方式：跑步/游动
+     * 或者
+     * 药品名称：阿莫西林/幸福感冒
      */
-    private String type;
+    private String method;
     /**
      * 内容
      */
     private String content;
+    /**
+     * 类型 1-跑步；2-吃药
+     */
+    private int typeId;
     /**
      * 记录时间
      */
@@ -40,12 +46,12 @@ public class DiaryEntityData implements BaseAdapterData {
         this.diaryId = diaryId;
     }
 
-    public String getType() {
-        return type;
+    public String getMethod() {
+        return method;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setMethod(String method) {
+        this.method = method;
     }
 
     public String getContent() {
@@ -62,6 +68,14 @@ public class DiaryEntityData implements BaseAdapterData {
 
     public void setRecordDate(String recordDate) {
         this.recordDate = recordDate;
+    }
+
+    public int getTypeId() {
+        return typeId;
+    }
+
+    public void setTypeId(int typeId) {
+        this.typeId = typeId;
     }
 
     @Override

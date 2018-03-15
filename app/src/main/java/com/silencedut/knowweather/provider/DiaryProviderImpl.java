@@ -5,9 +5,8 @@ import android.support.annotation.WorkerThread;
 
 import com.silencedut.hub_annotation.HubInject;
 import com.silencedut.knowweather.repository.IDiaryRepositoryApi;
-import com.silencedut.knowweather.ui.adapter.diary.DailyDiaryData;
-import com.silencedut.weather_core.CoreManager;
 import com.silencedut.knowweather.ui.adapter.diary.DiaryEntityData;
+import com.silencedut.weather_core.CoreManager;
 
 import java.util.List;
 
@@ -44,7 +43,17 @@ public class DiaryProviderImpl implements IDiaryProvider {
 
     @Override
     public void loadDiaryData() {
-        CoreManager.getImpl(IDiaryRepositoryApi.class).insertTestData();
+//        CoreManager.getImpl(IDiaryRepositoryApi.class).insertTestData();
+    }
+
+    @Override
+    public void insertSportData(DiaryEntityData data) {
+        CoreManager.getImpl(IDiaryRepositoryApi.class).insertTestData(data);
+    }
+
+    @Override
+    public void deleteDiaryData(DiaryEntityData data) {
+        CoreManager.getImpl(IDiaryRepositoryApi.class).deleteDiaryData(data);
     }
 
     @Override

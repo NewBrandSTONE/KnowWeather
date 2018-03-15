@@ -1,13 +1,21 @@
 package com.silencedut.knowweather.ui.fragment.diary;
 
 import android.arch.lifecycle.Observer;
+import android.content.DialogInterface;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.TextInputEditText;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.AppCompatRadioButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.ldf.calendar.Utils;
@@ -23,6 +31,7 @@ import com.silencedut.knowweather.ui.adapter.diary.DiaryEntityData;
 import com.silencedut.knowweather.ui.adapter.diary.DiaryRecyclerViewAdapter;
 import com.silencedut.knowweather.ui.calendar.CalendarCustomView;
 import com.silencedut.knowweather.ui.calendar.ThemeDayView;
+import com.silencedut.knowweather.ui.recyclerview.OzItemTouchHepler;
 import com.silencedut.knowweather.viewmodel.diary.DiaryViewModel;
 import com.silencedut.weather_core.corebase.BaseFragment;
 import com.silencedut.weather_core.viewmodel.ModelProvider;
@@ -72,6 +81,7 @@ public class HealthDiaryFragment extends BaseFragment {
     private boolean initiated = false;
     private DiaryViewModel mDiaryModel;
     private BaseRecyclerAdapter mMoreInfoAdapter;
+    private DiaryRecyclerViewAdapter mDiaryRecyclerViewAdapter;
 
     @Override
     public int getContentViewId() {
@@ -218,6 +228,7 @@ public class HealthDiaryFragment extends BaseFragment {
             @Override
             public void onSelectDate(CalendarDate date) {
                 refreshClickDate(date);
+                mDiaryModel.fetchDiary(date.toString());
             }
 
             @Override
@@ -248,6 +259,40 @@ public class HealthDiaryFragment extends BaseFragment {
         rvToDoList.setLayoutManager(new LinearLayoutManager(getActivity()));
         rvToDoList.setAdapter(new BaseRecyclerAdapter(getContext()));
         mMoreInfoAdapter = new BaseRecyclerAdapter(getContext());
+        ItemTouchHelper.Callback itemTouchCallback = new OzItemTouchHepler(new OzItemTouchHepler.OnItemTouchCallbackListener() {
+            @Override
+            public void onSwiped(int adapterPosition) {
+                List<DiaryEntityData> diaryData = mDiaryRecyclerViewAdapter.getDiaryData();
+                final DiaryEntityData data = diaryData.get(adapterPosition);
+                Log.i("asd", "position->" + adapterPosition);
+                // 提示确定要删除？
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setTitle("提示");
+                builder.setMessage("确定要删除这条数据吗？");
+                builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        mDiaryModel.fetchDiary(currentDate.toString());
+                    }
+                });
+                builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        mDiaryModel.deleteDiaryData(data);
+                        mDiaryModel.fetchDiary(currentDate.toString());
+                    }
+                });
+                builder.show();
+            }
+
+            @Override
+            public boolean onMove(int srcPosition, int targetPosition) {
+                Log.i("asd", "srcPosition->" + srcPosition + " | targetPosition->" + targetPosition);
+                return true;
+            }
+        });
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(itemTouchCallback);
+        itemTouchHelper.attachToRecyclerView(rvToDoList);
     }
 
     @OnClick(R.id.float_action)
@@ -255,8 +300,50 @@ public class HealthDiaryFragment extends BaseFragment {
         // 弹出窗口做类型判断
         // 添加数据
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setTitle("asd");
-        builder.setMessage("asd2");
+        View dialogView = LayoutInflater.from(getContext()).inflate(R.layout.running_alertdialog_content_layout, null, false);
+        final TextInputEditText editTime = dialogView.findViewById(R.id.ed_time);
+        final TextInputEditText editeMethod = dialogView.findViewById(R.id.ed_method);
+        final TextInputLayout textMethod = dialogView.findViewById(R.id.text_method);
+        final TextInputLayout textTime = dialogView.findViewById(R.id.text_time);
+        final AppCompatRadioButton sportTypeBtn = dialogView.findViewById(R.id.button_sport);
+        final AppCompatRadioButton medicineTypeBtn = dialogView.findViewById(R.id.button_medicine);
+
+        sportTypeBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) {
+                    textMethod.setHint("方式");
+                    textTime.setHint("时长");
+                }
+            }
+        });
+
+        medicineTypeBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) {
+                    textMethod.setHint("药品名称");
+                    textTime.setHint("数量");
+                }
+            }
+        });
+
+
+        builder.setView(dialogView);
+        builder.setPositiveButton("保存", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                // 保存数量
+                String sportsTime = editTime.getText().toString().trim();
+                // 保存药品名称或者运动种类
+                String sportMethod = editeMethod.getText().toString().trim();
+                // 保存类型, 1-运动；2-吃药
+                int typeId = sportTypeBtn.isChecked() ? 1 : 2;
+                mDiaryModel.insertSportData(sportMethod, sportsTime, currentDate.toString(), typeId);
+                mDiaryModel.fetchDiary(currentDate.toString());
+            }
+        });
+        builder.setNegativeButton("取消", null);
         builder.show();
     }
 
@@ -271,7 +358,7 @@ public class HealthDiaryFragment extends BaseFragment {
                 onMoreDiaryData(diaryEntityData);
             }
         });
-        mDiaryModel.fetchDiary();
+        mDiaryModel.fetchDiary(currentDate.toString());
     }
 
     /**
@@ -281,9 +368,9 @@ public class HealthDiaryFragment extends BaseFragment {
      */
     private void onMoreDiaryData(List<DiaryEntityData> diaryData) {
         if (diaryData != null) {
-//            mMoreInfoAdapter.registerHolder(DiaryRecyclerViewHolder.class, diaryData);
             // 加载数据
-            rvToDoList.setAdapter(new DiaryRecyclerViewAdapter(getContext(), diaryData));
+            mDiaryRecyclerViewAdapter = new DiaryRecyclerViewAdapter(getContext(), diaryData);
+            rvToDoList.setAdapter(mDiaryRecyclerViewAdapter);
         }
     }
 }

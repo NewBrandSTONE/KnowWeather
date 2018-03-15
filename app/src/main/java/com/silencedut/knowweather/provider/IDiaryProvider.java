@@ -41,4 +41,8 @@ public interface IDiaryProvider extends ICoreApi {
     void saveCurrentDiary(DiaryEntityData entityData);
 
     void loadDiaryData();
+
+    void insertSportData(DiaryEntityData data);
+
+    void deleteDiaryData(DiaryEntityData data);
 }

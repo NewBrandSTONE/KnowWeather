@@ -1,39 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/dark_background"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/common_dimen_big"
         android:background="@color/main_background"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
 
         <android.support.v7.widget.SwitchCompat
             android:id="@+id/theme_switch"
             style="@style/core_SettingTextStyle"
             android:paddingRight="0dp"
-            android:text="@string/notification_show"
-            />
+            android:text="@string/notification_show" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/divider_height"
             android:layout_below="@id/theme_switch"
-            android:background="@color/dividers_black"/>
+            android:background="@color/dividers_black" />
 
         <TextView
             android:id="@+id/notification_choose"
             style="@style/core_SettingTextStyle"
             android:layout_below="@id/theme_switch"
-            android:text="@string/notification_theme"
-            />
+            android:text="@string/notification_theme" />
 
         <TextView
             android:id="@+id/notification_theme"
@@ -42,8 +37,7 @@
             android:layout_below="@id/theme_switch"
             android:layout_toLeftOf="@+id/more"
             android:gravity="center_vertical"
-            android:textSize="@dimen/text_size_small"
-            />
+            android:textSize="@dimen/text_size_small" />
 
         <ImageView
             android:id="@+id/more"
@@ -52,8 +46,7 @@
             android:layout_alignParentRight="true"
             android:layout_below="@id/theme_switch"
             android:layout_marginRight="@dimen/common_dimen_mid"
-            android:src="@mipmap/core_more"
-            />
+            android:src="@mipmap/core_more" />
 
         <View
             android:id="@+id/background_holder"
@@ -61,8 +54,7 @@
             android:layout_height="@dimen/common_dimen_big"
             android:layout_below="@id/more"
             android:background="@color/dark_background"
-            android:visibility="gone"
-            />
+            android:visibility="gone" />
 
 
         <android.support.v7.widget.SwitchCompat
@@ -70,21 +62,19 @@
             style="@style/core_SettingTextStyle"
             android:layout_below="@id/background_holder"
             android:text="@string/alarm_allow"
-            android:visibility="gone"
-            />
+            android:visibility="gone" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/divider_height"
             android:layout_below="@id/alarm_switch"
-            android:background="@color/dividers_black"/>
+            android:background="@color/dividers_black" />
 
         <TextView
             android:id="@+id/update_allow"
             style="@style/core_SettingTextStyle"
             android:layout_below="@id/alarm_switch"
-            android:text="@string/update_allow"
-            />
+            android:text="@string/update_allow" />
 
         <TextView
             android:id="@+id/update_schedule"
@@ -94,8 +84,7 @@
             android:layout_toLeftOf="@+id/schedule_more"
             android:gravity="center_vertical"
             android:text="@string/update_schedule"
-            android:textSize="@dimen/text_size_small"
-            />
+            android:textSize="@dimen/text_size_small" />
 
         <ImageView
             android:id="@+id/schedule_more"
@@ -104,23 +93,21 @@
             android:layout_alignParentRight="true"
             android:layout_below="@id/alarm_switch"
             android:layout_marginRight="@dimen/common_dimen_mid"
-            android:src="@mipmap/core_more"
-            />
+            android:src="@mipmap/core_more" />
 
         <View
             android:id="@+id/background_holder2"
             android:layout_width="match_parent"
             android:layout_height="@dimen/common_dimen_big"
             android:layout_below="@id/schedule_more"
-            android:background="@color/dark_background"
-            />
+            android:background="@color/dark_background" />
 
         <TextView
             android:id="@+id/about"
             style="@style/core_SettingTextStyle"
             android:layout_below="@id/background_holder2"
             android:text="@string/about"
-            />
+            android:visibility="gone" />
 
     </RelativeLayout>
 </android.support.v4.widget.NestedScrollView>

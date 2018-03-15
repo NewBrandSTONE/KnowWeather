@@ -56,5 +56,5 @@ dependencies {
     annotationProcessor "android.arch.persistence.room:compiler:$gradle.room_compiler"
     annotationProcessor "android.arch.lifecycle:compiler:$gradle.lifecycle_compiler"
     // 日记
-    compile 'com.github.MagicMashRoom:SuperCalendar:1.6'
+    api 'com.github.MagicMashRoom:SuperCalendar:1.6'
 }

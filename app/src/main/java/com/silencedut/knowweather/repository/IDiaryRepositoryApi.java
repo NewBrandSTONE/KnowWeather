@@ -41,5 +41,12 @@ public interface IDiaryRepositoryApi extends ICoreApi {
      */
     void saveCurrentDiary(DiaryEntityData entityData);
 
-    void insertTestData();
+    /**
+     * 插入日记
+     *
+     * @param data 日记
+     */
+    void insertTestData(DiaryEntityData data);
+
+    void deleteDiaryData(DiaryEntityData data);
 }

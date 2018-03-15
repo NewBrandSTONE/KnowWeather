@@ -3,10 +3,10 @@ package com.silencedut.knowweather.repository;
 import android.arch.lifecycle.MutableLiveData;
 import android.os.Handler;
 
-import com.silencedut.knowweather.repository.db.DiaryDatabase;
 import com.silencedut.hub_annotation.HubInject;
-import com.silencedut.taskscheduler.TaskScheduler;
+import com.silencedut.knowweather.repository.db.DiaryDatabase;
 import com.silencedut.knowweather.ui.adapter.diary.DiaryEntityData;
+import com.silencedut.taskscheduler.TaskScheduler;
 import com.silencedut.weather_core.repository.DBHelper;
 
 import java.util.List;
@@ -36,6 +36,11 @@ public class DiaryRepositoryImpl implements IDiaryRepositoryApi {
 
     @Override
     public List<DiaryEntityData> searchDiary(String date) {
+        try {
+            return mDiaryDatabase.diaryDao().queryDiaryByDate(date);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
@@ -55,16 +60,26 @@ public class DiaryRepositoryImpl implements IDiaryRepositoryApi {
     }
 
     @Override
-    public void insertTestData() {
+    public void insertTestData(final DiaryEntityData data) {
         mCityHandler.post(new Runnable() {
             @Override
             public void run() {
                 try {
-                    DiaryEntityData data = new DiaryEntityData();
-                    data.setContent("测试内容");
-                    data.setRecordDate("测试记录日期");
-                    data.setType("跑步");
                     mDiaryDatabase.diaryDao().insertDiary(data);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    @Override
+    public void deleteDiaryData(final DiaryEntityData data) {
+        mCityHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    mDiaryDatabase.diaryDao().delete(data);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
