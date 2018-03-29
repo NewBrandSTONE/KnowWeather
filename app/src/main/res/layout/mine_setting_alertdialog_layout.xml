@@ -5,84 +5,119 @@
     android:background="@color/white"
     android:orientation="vertical">
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/text_name"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:hint="姓名">
+        android:layout_height="match_parent">
 
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/ed_name"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:maxLength="10"
-            android:padding="10dp" />
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical">
 
-    </android.support.design.widget.TextInputLayout>
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:orientation="horizontal"
+                android:padding="10dp">
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/text_age"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:hint="年龄">
+                <RadioButton
+                    android:id="@+id/cb_man"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="男" />
 
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/ed_age"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:maxLength="10"
-            android:padding="10dp" />
+                <RadioButton
+                    android:id="@+id/women"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="女" />
+            </RadioGroup>
 
-    </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/text_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:hint="姓名">
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/text_job"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:hint="职业">
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/ed_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLength="10"
+                    android:padding="10dp" />
 
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/ed_job"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:maxLength="10"
-            android:padding="10dp" />
+            </android.support.design.widget.TextInputLayout>
 
-    </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/text_age"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:hint="年龄">
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/text_address"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:hint="居住地">
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/ed_age"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:maxLength="10"
+                    android:padding="10dp" />
 
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/ed_address"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:maxLength="20"
-            android:padding="10dp" />
+            </android.support.design.widget.TextInputLayout>
 
-    </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/text_job"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:hint="职业">
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/text_ill"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:hint="病史">
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/ed_job"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLength="10"
+                    android:padding="10dp" />
 
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/ed_ill"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:maxLength="10"
-            android:padding="10dp" />
+            </android.support.design.widget.TextInputLayout>
 
-    </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/text_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:hint="居住地">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/ed_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLength="20"
+                    android:padding="10dp" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/text_ill"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:hint="病史">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/ed_ill"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLength="10"
+                    android:padding="10dp" />
+
+            </android.support.design.widget.TextInputLayout>
+        </LinearLayout>
+    </ScrollView>
+
+
 </LinearLayout>
