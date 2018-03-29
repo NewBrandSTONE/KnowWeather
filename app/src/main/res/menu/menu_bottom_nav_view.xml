@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="ResourceName">
     <item
         android:id="@+id/menu_weather_item"
         android:checked="true"
@@ -15,4 +17,10 @@
         android:checked="true"
         android:icon="@mipmap/alarm_icon"
         android:title="@string/bottom_nav_alarm" />
+
+    <item
+        android:id="@+id/menu_mine_item"
+        android:checked="true"
+        android:icon="@mipmap/alarm_icon"
+        android:title="@string/bottom_nav_mine" />
 </menu>

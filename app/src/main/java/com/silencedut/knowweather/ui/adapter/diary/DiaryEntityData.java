@@ -31,7 +31,7 @@ public class DiaryEntityData implements BaseAdapterData {
     /**
      * 类型 1-跑步；2-吃药
      */
-    private int typeId;
+    private String typeId;
     /**
      * 记录时间
      */
@@ -70,11 +70,11 @@ public class DiaryEntityData implements BaseAdapterData {
         this.recordDate = recordDate;
     }
 
-    public int getTypeId() {
+    public String getTypeId() {
         return typeId;
     }
 
-    public void setTypeId(int typeId) {
+    public void setTypeId(String typeId) {
         this.typeId = typeId;
     }
 

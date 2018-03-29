@@ -17,6 +17,8 @@
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
 
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:name=".WeatherApplication"
@@ -60,6 +62,12 @@
 
         </receiver>
 
+        <receiver android:name=".broadcast.alarm.AlarmBroadcast">
+            <intent-filter>
+                <action android:name="ELITOR_CLOCK" />
+            </intent-filter>
+        </receiver>
+
 
         <activity
             android:name="com.silencedut.weather_core.wxapi.WXEntryActivity"
@@ -94,6 +102,9 @@
             android:name="com.tencent.bugly.beta.ui.BetaActivity"
             android:theme="@android:style/Theme.Translucent" />
         <activity android:name=".ui.MainFragmentActivity" />
+        <activity
+            android:name=".broadcast.alarm.AlarmTimeOutActivity"
+            android:theme="@style/weather_TransparentActivity" />
 
         <service android:name="com.amap.api.location.APSService"></service>
 

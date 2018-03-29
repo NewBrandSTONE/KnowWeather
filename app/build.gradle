@@ -23,8 +23,7 @@ android {
             }
         }
 
-        resourcePrefix "weather"
-
+        //resourcePrefix "weather"
     }
 
     buildTypes {

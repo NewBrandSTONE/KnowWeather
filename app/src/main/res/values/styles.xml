@@ -8,6 +8,7 @@
     <style name="weather_TransparentActivity" parent="core_BaseAppTheme">
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
     </style>
 
     <style name="weather_weekIndicatorStyle">

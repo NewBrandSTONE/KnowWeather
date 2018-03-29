@@ -74,7 +74,7 @@ public class DiaryViewModel extends BaseViewModel {
         mDiary.postValue(data);
     }
 
-    public void insertSportData(String method, String time, String recordDate, int type) {
+    public void insertSportData(String method, String time, String recordDate, String type) {
         DiaryEntityData data = new DiaryEntityData();
         data.setTypeId(type);
         data.setMethod(method);

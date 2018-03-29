@@ -29,6 +29,7 @@ import com.silencedut.baselib.commonhelper.adapter.BaseRecyclerAdapter;
 import com.silencedut.knowweather.R;
 import com.silencedut.knowweather.ui.adapter.diary.DiaryEntityData;
 import com.silencedut.knowweather.ui.adapter.diary.DiaryRecyclerViewAdapter;
+import com.silencedut.knowweather.ui.adapter.diary.DiaryTypeEnum;
 import com.silencedut.knowweather.ui.calendar.CalendarCustomView;
 import com.silencedut.knowweather.ui.calendar.ThemeDayView;
 import com.silencedut.knowweather.ui.recyclerview.OzItemTouchHepler;
@@ -307,13 +308,32 @@ public class HealthDiaryFragment extends BaseFragment {
         final TextInputLayout textTime = dialogView.findViewById(R.id.text_time);
         final AppCompatRadioButton sportTypeBtn = dialogView.findViewById(R.id.button_sport);
         final AppCompatRadioButton medicineTypeBtn = dialogView.findViewById(R.id.button_medicine);
+        final AppCompatRadioButton heartRateBtn = dialogView.findViewById(R.id.button_heart_rate);
+        final AppCompatRadioButton bloodPressureBtn = dialogView.findViewById(R.id.button_blood_pressure);
+
+        heartRateBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) {
+                    clearSetHintAndText(textMethod, textTime, "方式", "静止心率", "bpm", "");
+                }
+            }
+        });
+
+        bloodPressureBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) {
+                    clearSetHintAndText(textMethod, textTime, "方式", "主动脉血压", "mmHg", "");
+                }
+            }
+        });
 
         sportTypeBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b) {
-                    textMethod.setHint("方式");
-                    textTime.setHint("时长");
+                    clearSetHintAndText(textMethod, textTime, "方式", "", "时长", "");
                 }
             }
         });
@@ -322,8 +342,7 @@ public class HealthDiaryFragment extends BaseFragment {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b) {
-                    textMethod.setHint("药品名称");
-                    textTime.setHint("数量");
+                    clearSetHintAndText(textMethod, textTime, "药品名称", "", "数量", "");
                 }
             }
         });
@@ -337,14 +356,39 @@ public class HealthDiaryFragment extends BaseFragment {
                 String sportsTime = editTime.getText().toString().trim();
                 // 保存药品名称或者运动种类
                 String sportMethod = editeMethod.getText().toString().trim();
-                // 保存类型, 1-运动；2-吃药
-                int typeId = sportTypeBtn.isChecked() ? 1 : 2;
-                mDiaryModel.insertSportData(sportMethod, sportsTime, currentDate.toString(), typeId);
+                // 保存类型, 1-运动；2-吃药；3-心率；4-血压
+                String type = getSelectType(sportTypeBtn.isChecked(), medicineTypeBtn.isChecked()
+                        , heartRateBtn.isChecked(), bloodPressureBtn.isChecked());
+                mDiaryModel.insertSportData(sportMethod, sportsTime, currentDate.toString(), type);
                 mDiaryModel.fetchDiary(currentDate.toString());
             }
         });
         builder.setNegativeButton("取消", null);
         builder.show();
+    }
+
+    private void clearSetHintAndText(TextInputLayout methodInputLayout, TextInputLayout timeInputLayout, String methodHint
+            , String methodText, String timeHint, String timeText) {
+        // 设置方法
+        methodInputLayout.setHint(methodHint);
+        methodInputLayout.getEditText().setText(methodText);
+        // 设置数量
+        timeInputLayout.setHint(timeHint);
+        timeInputLayout.getEditText().setText(timeText);
+    }
+
+    private String getSelectType(boolean isSport, boolean isMedicine
+            , boolean isHeartRate, boolean isBloodPressure) {
+        if (isSport) {
+            return DiaryTypeEnum.SPORT.name();
+        } else if (isMedicine) {
+            return DiaryTypeEnum.MEDICINE.name();
+        } else if (isHeartRate) {
+            return DiaryTypeEnum.HEART_RATE.name();
+        } else if (isBloodPressure) {
+            return DiaryTypeEnum.BLOOD_PRESSURE.name();
+        }
+        return "";
     }
 
     @Override

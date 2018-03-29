@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:ignore="ResourceName">
 
     <RadioGroup
         android:layout_width="match_parent"
@@ -23,14 +25,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="用药" />
+
+        <android.support.v7.widget.AppCompatRadioButton
+            android:id="@+id/button_heart_rate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="心率" />
+
+        <android.support.v7.widget.AppCompatRadioButton
+            android:id="@+id/button_blood_pressure"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="血压" />
     </RadioGroup>
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/text_method"
         android:layout_width="match_parent"
-        android:hint="方式"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp">
+        android:layout_margin="20dp"
+        android:hint="方式">
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/ed_method"
@@ -44,9 +58,9 @@
     <android.support.design.widget.TextInputLayout
         android:id="@+id/text_time"
         android:layout_width="match_parent"
-        android:hint="时长"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp">
+        android:layout_margin="20dp"
+        android:hint="时长">
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/ed_time"

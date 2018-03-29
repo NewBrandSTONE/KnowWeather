@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:fab="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -74,7 +73,16 @@
                     android:text="@string/weather_refreshing"
                     android:textColor="@color/secondly_text_white"
                     android:textSize="@dimen/text_size_small" />
+
             </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/float_action"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center_vertical|right"
+                android:layout_marginRight="36dp"
+                android:src="@mipmap/weather_add_icon" />
         </android.support.v7.widget.Toolbar>
 
         <LinearLayout
@@ -270,15 +278,15 @@
             <!-- paddingBottom或者magin距离必须是MonthPager高度的1/6-->
             <!-- RecyclerView的高度必须是MatchParent-->
             <!-- RecyclerView的background必须是非透明-->
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/float_action"
-                android:layout_width="@dimen/toolbar_height"
-                android:layout_height="@dimen/toolbar_height"
-                android:layout_gravity="bottom|right"
-                android:layout_margin="@dimen/float_button_margin"
-                android:clickable="true"
-                android:src="@mipmap/weather_refresh"
-                app:rippleColor="@color/main_background" />
+            <!--<android.support.design.widget.FloatingActionButton-->
+            <!--android:id="@+id/float_action"-->
+            <!--android:layout_width="@dimen/toolbar_height"-->
+            <!--android:layout_height="@dimen/toolbar_height"-->
+            <!--android:layout_gravity="bottom|right"-->
+            <!--android:layout_margin="@dimen/float_button_margin"-->
+            <!--android:clickable="true"-->
+            <!--android:src="@mipmap/weather_refresh"-->
+            <!--app:rippleColor="@color/main_background" />-->
 
         </android.support.design.widget.CoordinatorLayout>
     </LinearLayout>

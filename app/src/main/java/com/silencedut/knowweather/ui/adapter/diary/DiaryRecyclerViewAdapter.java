@@ -47,13 +47,36 @@ public class DiaryRecyclerViewAdapter extends RecyclerView.Adapter<DiaryRecycler
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.title.setText(mDatas.get(position).getMethod());
-        Drawable orangeDrawable = mContext.getResources().getDrawable(R.drawable.drawable_left_circle_title);
-        orangeDrawable.setBounds(0, 0, orangeDrawable.getMinimumWidth(), orangeDrawable.getMinimumHeight());
-        Drawable redDrawable = mContext.getResources().getDrawable(R.drawable.drawable_left_circle_title_red);
-        redDrawable.setBounds(0, 0, redDrawable.getMinimumWidth(), redDrawable.getMinimumHeight());
-        holder.title.setCompoundDrawables(mDatas.get(position).getTypeId() == 1 ? orangeDrawable : redDrawable, null, null, null);
+        Drawable orangeDrawable = initLeftDrawable(R.drawable.drawable_left_circle_title);
+        Drawable redDrawable = initLeftDrawable(R.drawable.drawable_left_circle_title_red);
+
+        Drawable leftDrawable = initLeftDrawable(R.drawable.drawable_left_circle_title);
+
+        String type = mDatas.get(position).getTypeId();
+        String rightUnitText = "";
+        if (DiaryTypeEnum.SPORT.name().equals(type)) {
+            leftDrawable = initLeftDrawable(R.drawable.drawable_left_circle_title);
+            rightUnitText = "小时";
+        } else if (DiaryTypeEnum.MEDICINE.name().equals(type)) {
+            leftDrawable = initLeftDrawable(R.drawable.drawable_left_circle_title_red);
+            rightUnitText = "数量";
+        } else if (DiaryTypeEnum.HEART_RATE.name().equals(type)) {
+            leftDrawable = initLeftDrawable(R.drawable.drawable_left_circle_title_blue);
+            rightUnitText = "bpm";
+        } else if (DiaryTypeEnum.BLOOD_PRESSURE.name().equals(type)) {
+            leftDrawable = initLeftDrawable(R.drawable.drawable_left_circle_title_green);
+            rightUnitText = "mmHg";
+        }
+
+        holder.title.setCompoundDrawables(leftDrawable, null, null, null);
         holder.content.setText(mDatas.get(position).getContent());
-        holder.unit.setText(mDatas.get(position).getTypeId() == 1 ? "小时" : "数量");
+        holder.unit.setText(rightUnitText);
+    }
+
+    private Drawable initLeftDrawable(int drawableId) {
+        Drawable drawable = mContext.getResources().getDrawable(drawableId);
+        drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+        return drawable;
     }
 
     @Override
