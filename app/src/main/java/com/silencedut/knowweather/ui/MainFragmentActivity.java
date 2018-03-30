@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import com.silencedut.knowweather.R;
 import com.silencedut.knowweather.ui.fragment.alarm.HealthAlarmFragment;
 import com.silencedut.knowweather.ui.fragment.diary.HealthDiaryFragment;
+import com.silencedut.knowweather.ui.fragment.memo.HealthMemoFragment;
 import com.silencedut.knowweather.ui.fragment.mine.HealthMineFragment;
 import com.silencedut.knowweather.ui.fragment.weather.HealthWeatherFragment;
 import com.silencedut.weather_core.corebase.BaseActivity;
@@ -31,6 +32,7 @@ public class MainFragmentActivity extends BaseActivity implements BottomNavigati
     private HealthDiaryFragment mDiaryFragment;
     private HealthAlarmFragment mAlarmFragment;
     private HealthMineFragment mMineFragment;
+    private HealthMemoFragment mMemoFragment;
 
     @Override
     public int getContentViewId() {
@@ -48,15 +50,18 @@ public class MainFragmentActivity extends BaseActivity implements BottomNavigati
         mAlarmFragment = new HealthAlarmFragment();
         mDiaryFragment = new HealthDiaryFragment();
         mMineFragment = new HealthMineFragment();
+        mMemoFragment = new HealthMemoFragment();
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.frame_main, mWeatherFragment, mWeatherFragment.getClass().getSimpleName())
                 .add(R.id.frame_main, mDiaryFragment, mDiaryFragment.getClass().getSimpleName())
                 .add(R.id.frame_main, mAlarmFragment, mAlarmFragment.getClass().getSimpleName())
                 .add(R.id.frame_main, mMineFragment, mMineFragment.getClass().getSimpleName())
+                .add(R.id.frame_main, mMemoFragment, mMemoFragment.getClass().getSimpleName())
                 .show(mWeatherFragment)
                 .hide(mDiaryFragment)
                 .hide(mAlarmFragment)
                 .hide(mMineFragment)
+                .hide(mMemoFragment)
                 .commit();
     }
 
@@ -76,6 +81,7 @@ public class MainFragmentActivity extends BaseActivity implements BottomNavigati
                         .hide(mDiaryFragment)
                         .hide(mAlarmFragment)
                         .hide(mMineFragment)
+                        .hide(mMemoFragment)
                         .commit();
 
                 break;
@@ -86,6 +92,7 @@ public class MainFragmentActivity extends BaseActivity implements BottomNavigati
                         .hide(mAlarmFragment)
                         .hide(mWeatherFragment)
                         .hide(mMineFragment)
+                        .hide(mMemoFragment)
                         .commit();
                 break;
             }
@@ -95,6 +102,7 @@ public class MainFragmentActivity extends BaseActivity implements BottomNavigati
                         .hide(mDiaryFragment)
                         .hide(mWeatherFragment)
                         .hide(mMineFragment)
+                        .hide(mMemoFragment)
                         .commit();
                 break;
             }
@@ -104,6 +112,17 @@ public class MainFragmentActivity extends BaseActivity implements BottomNavigati
                         .hide(mDiaryFragment)
                         .hide(mWeatherFragment)
                         .hide(mAlarmFragment)
+                        .hide(mMemoFragment)
+                        .commit();
+                break;
+            }
+            case R.id.menu_memo_item: {
+                transaction
+                        .show(mMemoFragment)
+                        .hide(mDiaryFragment)
+                        .hide(mWeatherFragment)
+                        .hide(mAlarmFragment)
+                        .hide(mMineFragment)
                         .commit();
                 break;
             }

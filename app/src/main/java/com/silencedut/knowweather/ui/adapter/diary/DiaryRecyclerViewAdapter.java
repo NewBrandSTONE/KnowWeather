@@ -14,9 +14,6 @@ import com.silencedut.knowweather.R;
 import java.util.List;
 
 /**
- * <一句话简述功能>
- * <功能详细描述>
- *
  * @author gaohuang_yangzi@dahuatech.com
  * @version 2018/3/14
  */
@@ -110,6 +107,4 @@ public class DiaryRecyclerViewAdapter extends RecyclerView.Adapter<DiaryRecycler
     public interface onDiaryRecordClickListener {
         void onDiaryClick(DiaryEntityData data);
     }
-
-
 }

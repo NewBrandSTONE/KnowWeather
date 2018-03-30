@@ -10,7 +10,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TimePicker;
@@ -96,16 +95,21 @@ public class HealthAlarmFragment extends BaseFragment {
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                // 保存数据
-                Log.e("asd", "onClick: " + timePicker.getHour() + " | " + timePicker.getMinute());
 
+                int hour;
+                int minus;
+
+                hour = timePicker.getCurrentHour();
+                minus = timePicker.getCurrentMinute();
+
+                // 保存数据
                 try {
-                    mViewModel.insertData(String.format("%02d", timePicker.getHour()) + ":" + String.format("%02d", timePicker.getMinute()), 1);
+                    mViewModel.insertData(String.format("%02d", hour) + ":" + String.format("%02d", minus), 1);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
                 // 设置闹钟
-                initAlarm(timePicker.getHour(), timePicker.getMinute());
+                initAlarm(hour, minus);
                 mViewModel.fetchAlarmData();
             }
         });

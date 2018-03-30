@@ -68,7 +68,13 @@ public class HealthMineFragment extends BaseFragment {
     private void onMoreData(MineEntityData data) {
         // 加载数据
         if (data != null) {
-            mNameTv.setText(data.getName() != null ? data.getName().substring(0, 1) : "");
+            if (data.getName() != null) {
+                if (data.getName().length() > 1) {
+                    mNameTv.setText(data.getName().substring(0, 1));
+                } else {
+                    mNameTv.setText(data.getName());
+                }
+            }
             mAgeTv.setText(data.getAge() != null ? data.getAge() : "");
             mAddressTv.setText(data.getAddress() != null ? data.getAddress() : "");
             mJobTv.setText(data.getJob() != null ? data.getJob() : "");

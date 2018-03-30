@@ -14,7 +14,8 @@
     <string name="weather_lifeIndexes">生活指数</string>
 
     <string name="bottom_nav_weather" tools:ignore="ResourceName">天气</string>
-    <string name="bottom_nav_record" tools:ignore="ResourceName">记录</string>
+    <string name="bottom_nav_record" tools:ignore="ResourceName">日记</string>
     <string name="bottom_nav_alarm" tools:ignore="ResourceName">闹钟</string>
     <string name="bottom_nav_mine" tools:ignore="ResourceName">我的</string>
+    <string name="bottom_nav_memo" tools:ignore="ResourceName">记录</string>
 </resources>

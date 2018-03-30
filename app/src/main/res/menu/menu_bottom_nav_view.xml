@@ -23,4 +23,9 @@
         android:checked="true"
         android:icon="@mipmap/alarm_icon"
         android:title="@string/bottom_nav_mine" />
+    <item
+        android:id="@+id/menu_memo_item"
+        android:checked="true"
+        android:icon="@mipmap/alarm_icon"
+        android:title="@string/bottom_nav_memo" />
 </menu>
